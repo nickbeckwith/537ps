@@ -1,0 +1,6 @@
+# Don't track debug folder
+cmake-build-debug
+.idea
+
+# Ignored files
+CMakeLists.txt
