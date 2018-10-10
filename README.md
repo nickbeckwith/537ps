@@ -3,10 +3,10 @@
 # C/H Files
 - monitor.{ch}
 - queue.{ch}
-  - CreateStringQueue
-  - EnqueueString
-  - DequeueString
-  - PrintQueueStats
+  - createStringQueue
+  - enqueueString
+  - dequeueString
+  - printQueueStats
 - reader.{ch}
 - munch1.{ch}
 - munch2.{ch}
