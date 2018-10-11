@@ -11,6 +11,12 @@
 #include <stdlib.h>
 #include "reader.h"
 
+/**
+ * Reads in lines that are only MAX_STR_SIZE long and rejects
+ * others. Includes new line.
+ *
+ * @param q Queue to place information in
+ */
 void reader(Queue *q) {
     char *buffer = malloc(MAX_STR_SIZE * sizeof(char));
     int fitsBuffer;
@@ -21,8 +27,7 @@ void reader(Queue *q) {
             // check if the line fits into our buffer
             fitsBuffer = 0;
             for (int i = 0; i < MAX_STR_SIZE; i++) {
-                if (buffer[i] == '\n') {        // if there's a new line replace it with null
-                    buffer[i] = '\0';
+                if (buffer[i] == '\n') {        // if there's a new line, we're good
                     fitsBuffer = 1;
                     break;
                 }
@@ -34,7 +39,7 @@ void reader(Queue *q) {
                 // make sure we didn't consume EOF
                 if (fgetcOut == EOF) {
                     if (feof(stdin)) {
-                        fprintf(stdout, "End of file");
+                        enqueueString(q, NULL);
                         break;              // if end of file, get out of loop and terminate
                     } else {
                         fprintf(stdout, "Fatal error in reader.c/reader");
@@ -47,7 +52,7 @@ void reader(Queue *q) {
             }
         }
         else if (feof(stdin)) {
-            fprintf(stdout, "End of file");
+            enqueueString(q, NULL);
             break;              // if end of file, get out of loop and terminate
         }
         else {

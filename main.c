@@ -19,6 +19,12 @@
 int const DEPTH = 10;            // describes depth of queue
 
 int main(int argc, char * argv[]) {
+    char buffer[255];
+    while (fgets(buffer, 255, stdin) != NULL) {
+        fprintf(stdout, "%s", buffer);
+    }
+
+    /*
     // create three queues
     Queue *queue1 = createStringQueue(DEPTH);
     Queue *queue2 = createStringQueue(DEPTH);
@@ -27,4 +33,6 @@ int main(int argc, char * argv[]) {
     // create three threads
     pthread_t thread1, thread2, thread3;
     int proc1, proc2, proc3;
+     */
 }
+
