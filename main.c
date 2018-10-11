@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "queue.h"
-
 /*****************************************************
  * FILE NAME main.c
  *
@@ -15,6 +11,20 @@
  * AUTHOR: Nicholas Beckwith, Matthew Strimaitis
  *****************************************************/
 
-int main(int argc, char * argv[]) {
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include "queue.h"
 
+int const DEPTH = 10;            // describes depth of queue
+
+int main(int argc, char * argv[]) {
+    // create three queues
+    Queue *queue1 = createStringQueue(DEPTH);
+    Queue *queue2 = createStringQueue(DEPTH);
+    Queue *queue3 = createStringQueue(DEPTH);
+
+    // create three threads
+    pthread_t thread1, thread2, thread3;
+    int proc1, proc2, proc3;
 }
