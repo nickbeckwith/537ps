@@ -7,6 +7,7 @@
  *****************************************************/
 
 #include <stdio.h>
+#include <malloc.h>
 #include "queue.h"
 
 /**
@@ -18,6 +19,7 @@ void writer(Queue *q) {
     str = dequeueString(q);
     while(str != NULL) {
         fprintf(stdout, "%s", str);
+        free(str);
         str = dequeueString(q);
     }
 }
