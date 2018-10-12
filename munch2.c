@@ -13,7 +13,11 @@
 #include "queue.h"
 #include "munch2.h"
 
-
+/**
+ * Changes all lower case letters to uppercase
+ * @param q1 queue to receive data
+ * @param q2 queue to send data
+ */
 void munch2(Queue *q1, Queue *q2) {
     char *str;
     str = dequeueString(q1);
