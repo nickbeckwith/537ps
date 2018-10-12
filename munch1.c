@@ -1,5 +1,5 @@
 /*****************************************************
- * FILE NAME munch1.h
+ * FILE NAME munch1.c
  *
  * PURPOSE Munch1 will scan the line and replace each blank
  * character with an asterisk ("*") character. It will then
@@ -47,9 +47,11 @@ char * replaceSpace(char *str) {
  */
 void munch1(Queue *q1, Queue *q2) {
     char *str;
-    do {
-        str = dequeueString(q1);
+    str = dequeueString(q1);
+    while (str != NULL) {
         enqueueString(q2, replaceSpace(str));
-    } while (str != NULL);
+        str = dequeueString(q1);
+    }
 }
+
 
