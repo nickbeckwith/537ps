@@ -10,14 +10,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "reader.h"
+#include "main.h"
 
 /**
  * Reads in lines that are only MAX_STR_SIZE long and rejects
  * others. Includes new line.
  *
- * @param q Queue to place information in
+ * @param args readWriteParam struct
  */
-void reader(Queue *q) {
+void * reader(void *args) {
+    Queue *q = ((struct readWriteParams*) args)->q;
     char *buffer = malloc(MAX_STR_SIZE * sizeof(char));
     int fitsBuffer;
     int fgetcOut;
@@ -42,7 +44,7 @@ void reader(Queue *q) {
                         enqueueString(q, NULL);
                         break;              // if end of file, get out of loop and terminate
                     } else {
-                        fprintf(stdout, "Fatal error in reader.c/reader");
+                        fprintf(stdout, "Fatal error in reader.c/reader\n");
                         exit(EXIT_FAILURE);
                     }
                 }
@@ -56,7 +58,7 @@ void reader(Queue *q) {
             break;              // if end of file, get out of loop and terminate
         }
         else {
-            fprintf(stdout, "Fatal error in reader.c/reader");
+            fprintf(stdout, "Fatal error in reader.c/reader\n");
             exit(EXIT_FAILURE);
         }
     }

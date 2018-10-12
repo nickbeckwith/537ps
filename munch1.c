@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <strings.h>
 #include "munch1.h"
+#include "main.h"
 
 
 /**
@@ -42,10 +43,12 @@ char * replaceSpace(char *str) {
  * Replaces all spaces with '*' until
  * we receive a null char
  *
- * @param q1 queue we receive input from
- * @param q2 queue that we send input to
+ * @param args munchParams struct
  */
-void munch1(Queue *q1, Queue *q2) {
+void * munch1(void *args) {
+    struct munchParams * params = args;
+    Queue *q1 = params->q1;
+    Queue *q2 = params->q2;
     char *str;
     str = dequeueString(q1);
     while (str != NULL) {

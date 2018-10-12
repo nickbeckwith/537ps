@@ -12,6 +12,6 @@
 
 #include "queue.h"
 
-void writer(Queue*);
+void * writer(void *);
 
 #endif //P2_WRITER_H

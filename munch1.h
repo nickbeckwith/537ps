@@ -14,6 +14,6 @@
 
 #include "queue.h"
 
-void munch1(Queue *q1, Queue *q2);
+void * munch1(void *args);
 
 #endif //P2_MUNCH1_H

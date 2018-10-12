@@ -12,13 +12,16 @@
 #include <stdio.h>
 #include "queue.h"
 #include "munch2.h"
+#include "main.h"
 
 /**
  * Changes all lower case letters to uppercase
- * @param q1 queue to receive data
- * @param q2 queue to send data
+ * @param args a munchParams struct
  */
-void munch2(Queue *q1, Queue *q2) {
+void * munch2(void *args) {
+    struct munchParams * params = args;
+    Queue *q1 = params->q1;
+    Queue *q2 = params->q2;
     char *str;
     str = dequeueString(q1);
     char *str_cpy;

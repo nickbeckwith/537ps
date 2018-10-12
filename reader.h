@@ -13,5 +13,5 @@
 
 #include "queue.h"
 
-void reader(Queue *);
+void * reader(void *);
 #endif //P2_READER_H
