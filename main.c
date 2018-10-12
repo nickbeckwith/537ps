@@ -14,14 +14,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <ctype.h>
 #include "queue.h"
+
 
 int const DEPTH = 10;            // describes depth of queue
 
 int main(int argc, char * argv[]) {
-    char buffer[255];
-    while (fgets(buffer, 255, stdin) != NULL) {
-        fprintf(stdout, "%s", buffer);
+    char *str = malloc(255 * sizeof(char));
+    while (fgets(str, 255, stdin) != NULL) {
+        fprintf(stdout, "%s", str);
     }
 
     /*

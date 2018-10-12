@@ -9,20 +9,23 @@
  * AUTHOR: Nicholas Beckwith, Matthew Strimaitis
  *****************************************************/
 
-#include <wchar.h>
+#include <stdio.h>
 #include "queue.h"
 #include "munch2.h"
+
 
 void munch2(Queue *q1, Queue *q2) {
     char *str;
     str = dequeueString(q1);
-    while (str != NULL) {
-        while (*str != '\0') {
-            if (islower(*str)) {
-                *str = (char) toupper(*str);
+    char *str_cpy;
+    while (fgets(str, 255, stdin) != NULL) {
+        str_cpy = str;
+        while (*str_cpy != '\0') {
+            if (islower(*str_cpy)) {
+                *str_cpy = (char) toupper(*str_cpy);
             }
-            str++;
+            str_cpy++;
         }
-        str = dequeueString(q1);
+        fprintf(stdout, "%s", str);
     }
 }

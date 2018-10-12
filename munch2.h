@@ -15,6 +15,6 @@
 #ifndef P2_MUNCH2_H
 #define P2_MUNCH2_H
 
-void munch2(Queue *q1, Queue *q2);
+void munch2(Queue*, Queue*);
 
 #endif //P2_MUNCH2_H
