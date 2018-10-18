@@ -8,7 +8,7 @@
 #ifndef P2_QUEUE_H
 #define P2_QUEUE_H
 
-int const extern MAX_STR_SIZE;
+extern int const MAX_STR_SIZE;
 
 typedef struct Queues {
     int enqueueCount;

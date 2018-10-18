@@ -48,6 +48,8 @@ void safelyCreateThread(pthread_t *thread, void *(*start_routine) (void *), void
 }
 
 int main(int argc, char * argv[]) {
+	(void)argc;
+	(void)argv;
     // create three queues
     Queue *q1 = createStringQueue(DEPTH);
     Queue *q2 = createStringQueue(DEPTH);
@@ -55,7 +57,6 @@ int main(int argc, char * argv[]) {
 
     // declare four threads
     pthread_t thread1, thread2, thread3, thread4;
-    int thread1ID, thread2ID, thread3ID, thread4ID;
 
     // Create four heap locations for arguments
     struct readWriteParams *args1 = malloc(sizeof(struct readWriteParams));
