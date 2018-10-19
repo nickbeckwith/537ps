@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#include <pthread.h>
 #include "queue.h"
 #include "main.h"
 
@@ -27,4 +28,5 @@ void * writer(void *args) {
         str = dequeueString(q);
     }
     fprintf(stdout, "Number of Strings Processed: %d\n", count);
+	pthread_exit(NULL);
 }

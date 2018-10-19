@@ -13,7 +13,7 @@
 #include <strings.h>
 #include "munch1.h"
 #include "main.h"
-
+#include <pthread.h>
 
 /**
  * Replaces first instance of string
@@ -23,7 +23,6 @@
  */
 char * replaceSpace(char *str) {
     char *tail;
-    int i;
     if (str == NULL) {
         return NULL;
     }
@@ -55,6 +54,7 @@ void * munch1(void *args) {
         enqueueString(q2, replaceSpace(str));
         str = dequeueString(q1);
     }
+	pthread_exit(NULL);
 }
 
 

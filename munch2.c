@@ -10,6 +10,7 @@
  *****************************************************/
 
 #include <stdio.h>
+#include <pthread.h>
 #include "queue.h"
 #include "munch2.h"
 #include "main.h"
@@ -35,4 +36,5 @@ void * munch2(void *args) {
         }
         fprintf(stdout, "%s", str);
     }
+	pthread_exit(NULL);
 }

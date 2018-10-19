@@ -9,6 +9,7 @@
  *****************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "reader.h"
 #include "main.h"
 
@@ -62,4 +63,5 @@ void * reader(void *args) {
             exit(EXIT_FAILURE);
         }
     }
+	pthread_exit(NULL);
 }
