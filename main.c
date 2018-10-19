@@ -21,7 +21,7 @@
 #include "munch1.h"
 #include "munch2.h"
 #include "reader.h"
-
+#include "queue.h"
 
 int const DEPTH = 10;            // describes depth of queue
 

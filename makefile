@@ -2,15 +2,15 @@
 CC = gcc
 
 # Compiler Flags
-FLAGS = -g -Wall -Wextra -lpthread
+FLAGS = -g -Wall -Wextra -pthread
 EXE = prodcomm
 
 # Dir for clang static analyzer
 SCAN_BUILD_DIR = scan-build-out
 
-default: main
+default: $(EXE) 
 
-$(EXE):	main.o munch1.o munch2.o queue.o reader.o writer.o
+$(EXE):	main.o queue.o munch1.o munch2.o reader.o writer.o
 	$(CC) $(FLAGS) -o $(EXE) main.o munch1.o munch2.o queue.o reader.o writer.o
 
 main.o:	main.c main.h
