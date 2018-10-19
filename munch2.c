@@ -24,9 +24,8 @@ void * munch2(void *args) {
     Queue *q1 = params->q1;
     Queue *q2 = params->q2;
     char *str;
-    str = dequeueString(q1);
     char *str_cpy;
-    while (fgets(str, 255, stdin) != NULL) {
+    while ((str = dequeueString(q1)) != NULL) {
         str_cpy = str;
         while (*str_cpy != '\0') {
             if (islower(*str_cpy)) {
@@ -34,7 +33,7 @@ void * munch2(void *args) {
             }
             str_cpy++;
         }
-        fprintf(stdout, "%s", str);
+		enqueueString(q2, str);
     }
 	pthread_exit(NULL);
 }
