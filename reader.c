@@ -30,8 +30,9 @@ void * reader(void *args) {
             // check if the line fits into our buffer
             fitsBuffer = 0;
             for (int i = 0; i < MAX_STR_SIZE; i++) {
-                if (buffer[i] == '\n') {        // if there's a new line, we're good
+                if (buffer[i] == '\n') {        // if there's a new line, it fits
                     fitsBuffer = 1;
+					buffer[i] = '\0';			// we're not new line friendly in these parts
                     break;
                 }
             }
