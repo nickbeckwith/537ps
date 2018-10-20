@@ -20,5 +20,3 @@ This project exemplifies the classic producer consumer synchronization problem. 
 to be each others producers and consumers. To accomplish this, we set up communication through a FIFO that was locked during reads
 and writes. All 3 communication paths were connected by a different FIFO. Finally, to signal the end of production, a NULL string
 is sent by the first producer (the stdin one) and acknoweldged downstream by thread exiting.
-
-Also, please quiz my partner on this code
