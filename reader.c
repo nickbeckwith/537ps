@@ -39,7 +39,7 @@ void * reader(void *args) {
                 if (feof(stdin)) {
                     buffer[i] = '\0';
                     if (buffer[0] != '\0') {            // if this isn't an empty string, (no new line)
-                        printf("%s\n", buffer);
+                        enqueueString(q, buffer);
                     }
                     enqueueString(q, NULL);
                     pthread_exit(NULL);

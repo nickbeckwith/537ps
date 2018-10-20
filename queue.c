@@ -5,7 +5,7 @@
 #include "queue.h"
 
 
-int const MAX_STR_SIZE = 20;
+int const MAX_STR_SIZE = 120;
 
 Queue * createStringQueue(int size) {
 	Queue *q;
