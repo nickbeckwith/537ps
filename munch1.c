@@ -64,6 +64,7 @@ void * munch1(void *args) {
         enqueueString(q2, str);
         str = dequeueString(q1);
     }
+    enqueueString(q2, NULL);       // enqueue NULL
 	pthread_exit(NULL);
 }
 

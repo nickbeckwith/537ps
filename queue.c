@@ -45,13 +45,14 @@ Queue * createStringQueue(int size) {
 void enqueueString(Queue *q, char *string) {
 	pthread_mutex_lock(&q->lock);
 	while (q->size == q->capacity) {
-		q->enqueueBlockCount++;
+		    q->enqueueBlockCount++;
 		pthread_cond_wait(&q->empty, &q->lock);	
 	}
 	// have to make it ciclic somehow. Mod does this.
 	q->tail = (q->tail + 1) % q->capacity;
 	q->arr[q->tail] = string;
 	q->size++;
+	if (string != NULL);
 	q->enqueueCount++;
 	pthread_cond_signal(&q->full);
 	pthread_mutex_unlock(&q->lock);
@@ -66,6 +67,7 @@ char * dequeueString(Queue *q) {
 	char *str = q->arr[q->head];
 	q->head = (q->head + 1) % q->capacity;
 	q->size--;
+	if (str != NULL);
 	q->dequeueCount++;
 	pthread_cond_signal(&q->empty);
 	pthread_mutex_unlock(&q->lock);

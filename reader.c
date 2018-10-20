@@ -36,17 +36,12 @@ void * reader(void *args) {
                 lineFinished = 1;
                 break;
             } else if (c == EOF) {
-                if (feof(stdin)) {
-                    buffer[i] = '\0';
-                    if (buffer[0] != '\0') {            // if this isn't an empty string, (no new line)
-                        enqueueString(q, buffer);
-                    }
-                    enqueueString(q, NULL);
-                    pthread_exit(NULL);
-                } else {
-                    fprintf(stderr, "Fatal Error: something went wrong in fgetc");
-                    exit(EXIT_FAILURE);
+                buffer[i] = '\0';
+                if (buffer[0] != '\0') {            // if this isn't an empty string, (no new line)
+                    enqueueString(q, buffer);
                 }
+                enqueueString(q, NULL);
+                pthread_exit(NULL);
             } else {
                 buffer[i] = (char) c;
             }
@@ -58,13 +53,8 @@ void * reader(void *args) {
                 if (c == '\n') {
                     break;
                 } else if (c == EOF) {
-                    if (feof(stdin)) {
-                        enqueueString(q, NULL);
-                        pthread_exit(NULL);
-                    } else {
-                        fprintf(stderr, "Fatal Error: something went wrong in fgetc");
-                        exit(EXIT_FAILURE);
-                    }
+                    enqueueString(q, NULL);
+                    pthread_exit(NULL);
                 }
             }
         }

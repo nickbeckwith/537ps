@@ -48,12 +48,12 @@ void safelyCreateThread(pthread_t *thread, void *(*start_routine) (void *), void
 }
 
 int main(int argc, char * argv[]) {
-	(void)argv;
+    freopen(argv[1], "r", stdin);
 	// let user know that the best way to use this function is minimalistically:)
-	if (argc > 1) {
+	/*if (argc > 1) {
 	    printf("usage: prodcomm");
 	    exit(EXIT_FAILURE);
-	}
+	}*/
     // create three queues
     Queue *q1 = createStringQueue(DEPTH);
     Queue *q2 = createStringQueue(DEPTH);
@@ -81,7 +81,10 @@ int main(int argc, char * argv[]) {
     safelyCreateThread(&thread3, &munch2, args3);
     safelyCreateThread(&thread4, &writer, args4);
 
-    // wait for the fourth thread which must finish last
+    // wait for threads
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
     pthread_join(thread4, NULL);
 
     // Print queue stats
