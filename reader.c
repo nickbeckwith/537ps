@@ -21,49 +21,52 @@
  */
 void * reader(void *args) {
     Queue *q = ((struct readWriteParams*) args)->q;
-    char *buffer;
-    int fitsBuffer;
-    int fgetcOut;
+    char * buffer;
+    int lineFinished;
+    int c;
     // for each input line, clip part that exceeds buffer size and place in queue
     while(1) {
-        buffer = malloc(MAX_STR_SIZE * sizeof(char));    // need a new memory location every string
-        if (fgets(buffer, MAX_STR_SIZE, stdin) != NULL) {
-            // check if the line fits into our buffer
-            fitsBuffer = 0;
-            for (int i = 0; i < MAX_STR_SIZE; i++) {
-                if (buffer[i] == '\n') {        // if there's a new line, it fits
-                    fitsBuffer = 1;
-					buffer[i] = '\0';			// we're not new line friendly in these parts
-                    break;
+        lineFinished = 0;
+        buffer = malloc(sizeof(char) * MAX_STR_SIZE);
+        for (int i = 0; i < MAX_STR_SIZE - 1; i++) {
+            c = getc(stdin);
+            if (c == '\n') {                            // read until \n or EOF
+                buffer[i] = '\0';
+                enqueueString(q, buffer);
+                lineFinished = 1;
+                break;
+            } else if (c == EOF) {
+                if (feof(stdin)) {
+                    buffer[i] = '\0';
+                    if (buffer[0] != '\0') {            // if this isn't an empty string, (no new line)
+                        printf("%s\n", buffer);
+                    }
+                    enqueueString(q, NULL);
+                    pthread_exit(NULL);
+                } else {
+                    fprintf(stderr, "Fatal Error: something went wrong in fgetc");
+                    exit(EXIT_FAILURE);
                 }
+            } else {
+                buffer[i] = (char) c;
             }
-            if (!fitsBuffer) {
-                fprintf(stderr, "Error: stdin line too long. Max size: %d\n", MAX_STR_SIZE);
-                // remove the rest of the line
-                while ((fgetcOut = fgetc(stdin)) != '\n' && fgetcOut != EOF);
-                // make sure we didn't consume EOF
-                if (fgetcOut == EOF) {
+        }
+        if (lineFinished == 0) {
+            fprintf(stderr, "Error: stdin line too long. Max size: %d\n", MAX_STR_SIZE);
+            while(1) {
+                c = fgetc(stdin);
+                if (c == '\n') {
+                    break;
+                } else if (c == EOF) {
                     if (feof(stdin)) {
                         enqueueString(q, NULL);
-                        break;              // if end of file, get out of loop and terminate
+                        pthread_exit(NULL);
                     } else {
-                        fprintf(stdout, "Fatal error in reader.c/reader\n");
+                        fprintf(stderr, "Fatal Error: something went wrong in fgetc");
                         exit(EXIT_FAILURE);
                     }
                 }
             }
-            else {
-                enqueueString(q, buffer);
-            }
-        }
-        else if (feof(stdin)) {
-            enqueueString(q, NULL);
-            break;              // if end of file, get out of loop and terminate
-        }
-        else {
-            fprintf(stdout, "Fatal error in reader.c/reader\n");
-            exit(EXIT_FAILURE);
         }
     }
-	pthread_exit(NULL);
 }
