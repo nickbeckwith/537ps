@@ -22,7 +22,7 @@ void * writer(void *args) {
     Queue *q = ((struct readWriteParams*) args)->q;
     str = dequeueString(q);
     while(str != NULL) {
-        fprintf(stdout, "%s", str);
+        fprintf(stdout, "%s\n", str);
         count++;
         free(str);
         str = dequeueString(q);

@@ -21,11 +21,12 @@
  */
 void * reader(void *args) {
     Queue *q = ((struct readWriteParams*) args)->q;
-    char *buffer = malloc(MAX_STR_SIZE * sizeof(char));
+    char *buffer;
     int fitsBuffer;
     int fgetcOut;
     // for each input line, clip part that exceeds buffer size and place in queue
     while(1) {
+        buffer = malloc(MAX_STR_SIZE * sizeof(char));    // need a new memory location every string
         if (fgets(buffer, MAX_STR_SIZE, stdin) != NULL) {
             // check if the line fits into our buffer
             fitsBuffer = 0;

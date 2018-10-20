@@ -19,9 +19,9 @@
  * Replaces first instance of string
  *
  * @param str a pointer to the string wanting to be replaced
- * @return a pointer to the last
+ * @return a pointer to the string that's left to be processed
  */
-char * replaceSpace(char *str) {
+char * replaceSpaceHelper(char *str) {
     char *tail;
     if (str == NULL) {
         return NULL;
@@ -30,13 +30,22 @@ char * replaceSpace(char *str) {
         tail = index(str, ' ');
         if (tail != NULL) {
             *tail = '*';
-            return (replaceSpace(tail));
+            return (replaceSpaceHelper(tail));
         }
         else {
             return (NULL);
         }
     }
 }
+
+/**
+ * Replaces spaces with *
+ * @param str the str to be modified directly
+ */
+void replaceSpace(char *str) {
+    replaceSpaceHelper(str);
+}
+
 
 /**
  * Replaces all spaces with '*' until
@@ -51,7 +60,8 @@ void * munch1(void *args) {
     char *str;
     str = dequeueString(q1);
     while (str != NULL) {
-        enqueueString(q2, replaceSpace(str));
+        replaceSpace(str);
+        enqueueString(q2, str);
         str = dequeueString(q1);
     }
 	pthread_exit(NULL);
