@@ -52,8 +52,9 @@ void enqueueString(Queue *q, char *string) {
 	q->tail = (q->tail + 1) % q->capacity;
 	q->arr[q->tail] = string;
 	q->size++;
-	if (string != NULL);
-	q->enqueueCount++;
+	if (string != NULL) {
+		q->enqueueCount++;
+	}
 	pthread_cond_signal(&q->full);
 	pthread_mutex_unlock(&q->lock);
 }
@@ -67,8 +68,9 @@ char * dequeueString(Queue *q) {
 	char *str = q->arr[q->head];
 	q->head = (q->head + 1) % q->capacity;
 	q->size--;
-	if (str != NULL);
-	q->dequeueCount++;
+	if (str != NULL) {
+		q->dequeueCount++;
+	}
 	pthread_cond_signal(&q->empty);
 	pthread_mutex_unlock(&q->lock);
 	return str;

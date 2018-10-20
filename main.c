@@ -35,7 +35,7 @@ int const DEPTH = 10;            // describes depth of queue
  */
 void safelyCreateThread(pthread_t *thread, void *(*start_routine) (void *), void *arg) {
     int err = pthread_create(thread, NULL, start_routine, arg);
-    if (err  != 0) {
+    if (err != 0) {
         if (err == EAGAIN) {
             fprintf(stderr, "ERROR: Insufficient resources to create another thread\n");
             exit(EXIT_FAILURE);
@@ -48,12 +48,12 @@ void safelyCreateThread(pthread_t *thread, void *(*start_routine) (void *), void
 }
 
 int main(int argc, char * argv[]) {
-    freopen(argv[1], "r", stdin);
+	(void)argv;
 	// let user know that the best way to use this function is minimalistically:)
-	/*if (argc > 1) {
+	if (argc > 1) {
 	    printf("usage: prodcomm");
 	    exit(EXIT_FAILURE);
-	}*/
+	}
     // create three queues
     Queue *q1 = createStringQueue(DEPTH);
     Queue *q2 = createStringQueue(DEPTH);
